@@ -122,6 +122,7 @@ parallel(runITsTasks)
         currentBuild.result = "ABORTED"
     } else {
         currentBuild.result = "FAILURE"
+        echo "[FAILURE-002] FlowInterruptedException ${e}"
     }
     throw e
 } catch (hudson.AbortException e) {
@@ -130,6 +131,7 @@ parallel(runITsTasks)
         currentBuild.result = "ABORTED"
     } else {
         currentBuild.result = "FAILURE"
+        echo "[FAILURE-003] AbortException ${e}"
     }
     throw e
 } catch (InterruptedException e) {
@@ -137,6 +139,7 @@ parallel(runITsTasks)
     throw e
 } catch (Throwable e) {
     currentBuild.result = "FAILURE"
+    echo "[FAILURE-001] ${e}"
     throw e
 } finally {
     // notify completion
